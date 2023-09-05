@@ -1,0 +1,18 @@
+.add-item-form {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 1rem;
+  width: 300px;
+}
+
+.add-item-form h2 {
+  text-align: center;
+}
+
+.add-item-form div {
+  margin-bottom: 1rem;
+}
+
+.add-item-form button {
+  width: 100%;
+}
