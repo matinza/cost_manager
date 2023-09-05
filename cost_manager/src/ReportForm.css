@@ -1,0 +1,19 @@
+/* ReportForm.css */
+.report-form {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 1rem;
+  width: 300px;
+}
+
+.report-form h2 {
+  text-align: center;
+}
+
+.report-form div {
+  margin-bottom: 1rem;
+}
+
+.report-form button {
+  width: 100%;
+}
