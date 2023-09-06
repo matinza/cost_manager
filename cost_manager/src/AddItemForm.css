@@ -25,7 +25,31 @@
   margin-bottom: 0.5rem;
 }
 
+.add-item-form input,
+.add-item-form select,
+.add-item-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.add-item-form input:focus,
+.add-item-form select:focus,
+.add-item-form textarea:focus {
+  border-color: #1976D2;
+}
+
+.add-item-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
 .add-item-form button {
+  margin-top: 1rem;
   width: 100%;
   padding: 10px 15px;
   background-color: #1976D2;
