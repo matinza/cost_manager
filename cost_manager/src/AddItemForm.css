@@ -1,6 +1,7 @@
 .add-item-form {
   border: 1px solid #ddd;
   padding: 1rem;
+  margin-right: 15px;
   width: 300px;
   background-color: aliceblue;
   display: flex;
