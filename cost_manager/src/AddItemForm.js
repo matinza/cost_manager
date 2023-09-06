@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addCost } from './idb';
 import './AddItemForm.css';
+import Swal from 'sweetalert2';
 
 const AddItemForm = () => {
   const [sum, setSum] = useState("");
@@ -15,13 +16,26 @@ const AddItemForm = () => {
       description,
       date: new Date()
     };
+
     try {
       await addCost(item);
       setSum("");
       setDescription("");
-      alert("Item added successfully");
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Item added successfully',
+        showConfirmButton: false,
+        timer: 1500
+      });
     } catch (err) {
-      alert("Error adding item");
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error adding item',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   };
 
