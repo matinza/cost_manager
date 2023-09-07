@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getMonthlyReport } from './idb';
+import { openCostsDB } from './idb';
 import './ReportForm.css';
 
 const ReportForm = () => {
@@ -9,7 +9,8 @@ const ReportForm = () => {
 
   const fetchReport = async () => {
     try {
-      const fetchedItems = await getMonthlyReport(month, year);
+      const db = await openCostsDB("costsDB");
+      const fetchedItems = await db.getMonthlyReport(month, year);
       setItems(fetchedItems);
     } catch (err) {
       alert("Error fetching report");
