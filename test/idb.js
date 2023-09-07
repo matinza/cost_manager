@@ -9,7 +9,7 @@ const openCostsDB = (dbName = "costsDB", version = 1) => {
             
             const customDb = {
                 _db: db,
-                addCost: (item) => {  // Arrow function
+                addCost: (item) => {
                     return new Promise((resolve, reject) => {
                         const transaction = customDb._db.transaction([storeName], "readwrite");
                         const store = transaction.objectStore(storeName);
@@ -18,7 +18,7 @@ const openCostsDB = (dbName = "costsDB", version = 1) => {
                         request.onsuccess = (event) => resolve(event.target.result);
                     });
                 },
-                getMonthlyReport: (month, year) => {  // Arrow function
+                getMonthlyReport: (month, year) => {
                     return new Promise((resolve, reject) => {
                         const transaction = customDb._db.transaction([storeName], "readonly");
                         const store = transaction.objectStore(storeName);
