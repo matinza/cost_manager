@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addCost } from './idb';
+import { openCostsDB } from './idb';
 import './AddItemForm.css';
 import Swal from 'sweetalert2';
 
@@ -18,7 +18,8 @@ const AddItemForm = () => {
     };
 
     try {
-      await addCost(item);
+      const db = await openCostsDB("costsDB");
+      await db.addCost(item);
       setSum("");
       setDescription("");
       Swal.fire({

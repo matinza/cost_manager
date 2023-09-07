@@ -1,64 +1,72 @@
-const dbName = "costsDB";
 const storeName = "costItems";
 
-const openCostsDB = (dbName, number) => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(dbName, number);
-    request.onerror = () => reject("Error opening database");
-    request.onsuccess = (event) => {
-      const dbInstance = event.target.result;
-      const dbObject = {
-        db: dbInstance,
-        addCost: async (item) => {
-          return new Promise((innerResolve, innerReject) => {
-            const transaction = dbInstance.transaction([storeName], "readwrite");
-            const store = transaction.objectStore(storeName);
-            const request = store.add(item);
-            request.onerror = () => innerReject("Error adding item");
-            request.onsuccess = (event) => innerResolve(event.target.result);
-          });
-        },
-        getMonthlyReport: async (month, year) => {
-          return new Promise((innerResolve, innerReject) => {
-            const transaction = dbInstance.transaction([storeName], "readonly");
-            const store = transaction.objectStore(storeName);
-            const items = [];
-    
-            store.openCursor().onsuccess = (event) => {
-              const cursor = event.target.result;
-              if (cursor) {
-                const item = cursor.value;
-                const itemDate = new Date(item.date);
-                if (itemDate.getMonth() === month && itemDate.getFullYear() === year) {
-                  items.push(item);
+const openCostsDB = (dbName = "costsDB", version = 1) => {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(dbName, version);
+        request.onerror = () => reject("Error opening database");
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            
+            const customDb = {
+                _db: db,
+                addCost: (item) => {  // Arrow function
+                    return new Promise((resolve, reject) => {
+                        const transaction = customDb._db.transaction([storeName], "readwrite");
+                        const store = transaction.objectStore(storeName);
+                        const request = store.add(item);
+                        request.onerror = () => reject("Error adding item");
+                        request.onsuccess = (event) => resolve(event.target.result);
+                    });
+                },
+                getMonthlyReport: (month, year) => {  // Arrow function
+                    return new Promise((resolve, reject) => {
+                        const transaction = customDb._db.transaction([storeName], "readonly");
+                        const store = transaction.objectStore(storeName);
+                        const items = [];
+
+                        store.openCursor().onsuccess = (event) => {
+                            const cursor = event.target.result;
+                            if (cursor) {
+                                const item = cursor.value;
+                                const itemDate = new Date(item.date);
+                                if (itemDate.getMonth() === month && itemDate.getFullYear() === year) {
+                                    items.push(item);
+                                }
+                                cursor.continue();
+                            } else {
+                                resolve(items);
+                            }
+                        };
+
+                        store.openCursor().onerror = (event) => {
+                            reject("Error fetching items");
+                        };
+                    });
                 }
-                cursor.continue();
-              } else {
-                innerResolve(items);
-              }
             };
-    
-            store.openCursor().onerror = (event) => {
-              innerReject("Error fetching items");
-            };
-          });
-        }
-      };
-      resolve(dbObject);
-    };
-    request.onupgradeneeded = (event) => {
-      const dbInstance = event.target.result;
-      if (!dbInstance.objectStoreNames.contains(storeName)) {
-        dbInstance.createObjectStore(storeName, { autoIncrement: true });
-      }
-    };
-  });
+
+            resolve(customDb);
+        };
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains(storeName)) {
+                db.createObjectStore(storeName, { autoIncrement: true });
+            }
+        };
+    });
 };
 
-// Create an idb object and attach the required function to it
+// Define an idb object to align with test.html expectations.
 const idb = {
-  openCostsDB: openCostsDB,
+    openCostsDB
 };
 
-// Attach idb object to the window for global access
-window.idb = idb;
+// If in a browser environment, attach the idb object to the window.
+if (typeof window !== "undefined") {
+    window.idb = idb;
+}
+
+// If in a CommonJS environment, export the functions as a module.
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = idb;
+}
