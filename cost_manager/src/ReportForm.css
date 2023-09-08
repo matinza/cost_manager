@@ -1,9 +1,11 @@
-ReportForm.css
+
 .report-form {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd3c;
   padding: 1rem;
   margin: 1rem;
   width: 300px;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, rgba(240, 248, 255, 0.863), rgba(255, 255, 255, 0.735)); 
 }
 
 .report-form h2 {
@@ -15,5 +17,38 @@ ReportForm.css
 }
 
 .report-form button {
+  margin-top: 1rem;
   width: 100%;
+  padding: 10px 15px;
+  background-color: #1976D2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.report-form button:hover {
+  background-color: #1565C0;
+}
+
+.report-form table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white; 
+}
+
+
+.report-form th,
+.report-form td {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+}
+
+.report-form th {
+  background-color: #f2f2f2d0;
+}
+
+.report-form th,
+.report-form td {
+  text-align: left;
 }
