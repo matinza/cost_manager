@@ -3,6 +3,8 @@
   padding: 1rem;
   margin-right: 15px;
   width: 300px;
+  max-width: 300px;
+  min-width: 300px;
   background-color: aliceblue;
   display: flex;
   flex-direction: column;

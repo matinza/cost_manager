@@ -42,6 +42,7 @@ const ReportForm = () => {
       </div>
       <button onClick={fetchReport}>Fetch Report</button>
       {showTable && (
+      <div className='table-wrapper'>
         <table>
           <thead>
             <tr>
@@ -60,6 +61,7 @@ const ReportForm = () => {
             ))}
           </tbody>
         </table>
+      </div>
       )}
     </div>
   );

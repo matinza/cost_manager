@@ -1,11 +1,11 @@
-
 .report-form {
   border: 1px solid #dddddd3c;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem 0 1rem 15px;
+  /* Adjusted margin to align with AddItemForm */
   width: 300px;
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, rgba(240, 248, 255, 0.863), rgba(255, 255, 255, 0.735)); 
+  background-color: aliceblue;
 }
 
 .report-form h2 {
@@ -27,16 +27,23 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .report-form button:hover {
   background-color: #1565C0;
+}
+
+/* Scrollable table */
+.report-form .table-wrapper {
+  margin-top: 5px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .report-form table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white; 
+  background-color: white;
 }
-
 
 .report-form th,
 .report-form td {

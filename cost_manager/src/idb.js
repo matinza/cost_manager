@@ -66,7 +66,7 @@ if (typeof window !== "undefined") {
     window.idb = idb;
 }
 
-// If in a CommonJS environment, export the functions as a module. (for react compoenents)
+// for react compoenents
 if (typeof module !== "undefined" && module.exports) {
     module.exports = idb;
 }
