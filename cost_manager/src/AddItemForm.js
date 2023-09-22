@@ -1,3 +1,8 @@
+/*
+  developers: 
+  Elinor_Shaar_318863289
+  Matan_Avital_204597082
+*/
 import React, { useState } from 'react';
 import { openCostsDB } from './idb';
 import './AddItemForm.css';

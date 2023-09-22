@@ -1,3 +1,8 @@
+/*
+  developers: 
+  Elinor_Shaar_318863289
+  Matan_Avital_204597082
+*/
 const storeName = "costItems";
 
 const openCostsDB = (dbName = "costsDB", version = 1) => {
